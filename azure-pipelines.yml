@@ -20,4 +20,4 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true'
+    arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true /p:Exclude="[xunit*]*"'
