@@ -21,3 +21,16 @@ steps:
     command: test
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true /p:Exclude="[xunit*]*"'
+
+- task: SonarSource.sonarqube.65d674beb5c43d6ea5f1f3afb872e336c1859ec1.SonarQubePrepare@4
+  displayName: Prepare analysis on SonarQube'
+  inputs:
+    SonarQube: 'SonarQube Service Connection'
+    projectKey: cassianopeixoto_cpx.configuration
+    projectName: cassianopeixoto-github
+
+- task: SonarSource.sonarqube.65d674beb5c43d6ea5f1f3afb872e336c1859ec1.SonarQubeAnalyze@4
+  displayName: 'Run Code Analysis' 
+
+- task: SonarSource.sonarqube.65d674beb5c43d6ea5f1f3afb872e336c1859ec1.SonarQubePublish@4
+  displayName: 'Publish Quality Gate Result'   
