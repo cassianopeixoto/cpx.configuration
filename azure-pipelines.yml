@@ -23,7 +23,11 @@ steps:
     arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true /p:Exclude="[xunit*]*"'
 
 - task: SonarQubePrepare@4
+  displayName: Análise SonarQube
   inputs:
     SonarQube: 'e3319a30-4520-42c2-9a06-938f1d3a927a'
     projectKey: 'cassianopeixoto_cpx.configuration'
     projectName: 'cpx.configuration'
+
+- task: SonarQubePublish@4
+  displayName: Publicar Análise SonarQube
