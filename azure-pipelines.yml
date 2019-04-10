@@ -8,6 +8,13 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: SonarQubePrepare@4
+  displayName: 'SonarQubePrepare'
+  inputs:
+    SonarQube: '4fb36f94-3c63-42ab-9ba5-5bce6bd0ea2d'
+    projectKey: 'cassianopeixoto_cpx.configuration'
+    projectName: 'cpx.configuration'
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -21,3 +28,10 @@ steps:
     command: test
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true /p:Exclude="[xunit*]*"'
+
+- task: SonarQubeAnalyze@4
+  displayName: 'SonarQubeAnalyze'    
+
+- task: SonarQubePublish@4
+  displayName: 'SonarQubePublish'
+
