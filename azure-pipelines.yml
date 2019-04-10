@@ -21,3 +21,12 @@ steps:
     command: test
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)  /p:CollectCoverage=true /p:Exclude="[xunit*]*"'
+
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'SonarCloud'
+    projectKey: 'cassianopeixoto_cpx.configuration'
+    projectName: 'cpx.configuration'
+    extraProperties: |
+     sonar.organization=alkampfergit-github
+     sonar.branch.name=$(Build.SourceBranchName)
