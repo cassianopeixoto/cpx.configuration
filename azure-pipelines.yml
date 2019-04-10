@@ -24,9 +24,6 @@ steps:
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'de54d075316561006fb8b43ad83fce00c67b4116'
+    SonarQube: 'e3319a30-4520-42c2-9a06-938f1d3a927a'
     projectKey: 'cassianopeixoto_cpx.configuration'
     projectName: 'cpx.configuration'
-    extraProperties: |
-     sonar.organization=alkampfergit-github
-     sonar.branch.name=$(Build.SourceBranchName)
