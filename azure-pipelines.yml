@@ -13,7 +13,7 @@ steps:
   inputs:
     SonarQube: '4fb36f94-3c63-42ab-9ba5-5bce6bd0ea2d'
     projectKey: 'cassianopeixoto_cpx.configuration'
-    projectName: 'cpx.configuration'
+    projectName: 'cassianopeixoto-github'
 
 - task: DotNetCoreCLI@2
   displayName: Build
