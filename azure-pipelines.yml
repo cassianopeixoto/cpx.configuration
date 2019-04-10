@@ -24,7 +24,7 @@ steps:
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'SonarCloud'
+    SonarQube: 'de54d075316561006fb8b43ad83fce00c67b4116'
     projectKey: 'cassianopeixoto_cpx.configuration'
     projectName: 'cpx.configuration'
     extraProperties: |
