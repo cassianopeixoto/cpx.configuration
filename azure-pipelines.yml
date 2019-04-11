@@ -8,12 +8,12 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: SonarQubePrepare@4
-  displayName: 'SonarQubePrepare'
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: '4fb36f94-3c63-42ab-9ba5-5bce6bd0ea2d'
-    projectKey: 'cassianopeixoto'
-    projectName: 'cpx.configuration'
+      SonarCloud: 'b595c2a5-7f6b-4a6d-a5a9-d7d2422d323c'
+      organization: 'cassianopeixoto-github'
+      projectKey: 'cassianopeixoto'
+      projectName: 'cpx.configuration'
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -32,6 +32,6 @@ steps:
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
 
-- task: SonarQubePublish@4
+- task: SonarCloudPublish@1
   displayName: 'SonarQubePublish'
 
