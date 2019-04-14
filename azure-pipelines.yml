@@ -27,7 +27,13 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)\\TestResults\\Coverage /p:Exclude="[xunit*]*"'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'reportgenerator'
+    arguments: '"-reports: $(Build.SourcesDirectory)\\TestResults\\Coverage\\coverage.cobertura.xml"  "-targetdir: $(Build.SourcesDirectory)\\TestResults\\Coverage\\Reports" -tag: $(Build.BuildNumber) -reportType:htmlInline'
 
 - task: PublishCodeCoverageResults@1
   inputs:
@@ -40,4 +46,6 @@ steps:
 
 - task: SonarCloudPublish@1
   displayName: 'SonarQubePublish'
+
+
 
