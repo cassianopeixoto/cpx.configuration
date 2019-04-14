@@ -29,6 +29,11 @@ steps:
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)\\TestResults\\Coverage /p:Exclude="[xunit*]*"'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)'
+    TargetFolder: '$(Build.SourcesDirectory)'
+
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: 'cpx.configuration'
@@ -36,7 +41,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'cobertura'
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.cobertura.xml'
+    summaryFileLocation: '$(Build.ArtifactStagingDirectory)/**/coverage.cobertura.xml'
     failIfCoverageEmpty: true
 
 - task: SonarQubeAnalyze@4
@@ -44,6 +49,8 @@ steps:
 
 - task: SonarCloudPublish@1
   displayName: 'SonarQubePublish'
+
+
 
 
 
