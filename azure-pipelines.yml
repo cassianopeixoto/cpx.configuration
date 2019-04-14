@@ -18,6 +18,12 @@ steps:
       projectName: 'cpx.configuration'
 
 - task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: 'restore'
+    projects: '$(testPath)'
+
+- task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build
