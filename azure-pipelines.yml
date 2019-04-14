@@ -37,19 +37,18 @@ steps:
     command: 'restore'
     projects: '$(testPath)'
 
-- task: DotNetCoreCLI@2
-  displayName: Coverage
+- task: reportgenerator@4
   inputs:
-    command: 'custom'
-    projects: '$(testPath)'
-    custom: 'reportgenerator'
-    arguments: '"-reports:$(coveragePath)/coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"'
+    reports: '$(coveragePath)/coverage.cobertura.xml'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;SonarQube'
 
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
 
 - task: SonarCloudPublish@1
   displayName: 'SonarQubePublish'
+
+
 
 
 
