@@ -32,6 +32,12 @@ steps:
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePathFile) /p:Exclude="[xunit*]*"'
 
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(coveragePathFile)'
+    failIfCoverageEmpty: true
+
 - task: reportgenerator@4
   inputs:
     reports: '$(coveragePathFile)'
