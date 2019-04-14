@@ -18,12 +18,6 @@ steps:
       projectName: 'cpx.configuration'
 
 - task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: 'restore'
-    projects: '$(testPath)'
-
-- task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build
@@ -38,10 +32,16 @@ steps:
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePath) /p:Exclude="[xunit*]*"'
 
 - task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: 'restore'
+    projects: '$(testPath)'
+
+- task: DotNetCoreCLI@2
   displayName: Coverage
   inputs:
     command: 'custom'
-    projects: '$(testPath)/CPX.Configuration.Test.csproj'
+    projects: '$(testPath)'
     custom: 'reportgenerator'
     arguments: '"-reports:$(coveragePath)/coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"'
 
