@@ -32,7 +32,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'cobertura'
-    #summaryFileLocation: $'$(System.DefaultWorkingDirectory)/coverage.cobertura.xml'
+    summaryFileLocation:
     failIfCoverageEmpty: true
 
 - task: SonarQubeAnalyze@4
