@@ -22,7 +22,7 @@ namespace CPX.Configuration.Test
         public void ShouldBeAbleToGetValue()
         {
             // arrange
-            /*var key = "key";
+            var key = "key";
             var value = "value";
 
             var mockSection = new Mock<IConfigurationSection>(MockBehavior.Strict);
@@ -40,7 +40,7 @@ namespace CPX.Configuration.Test
             Assert.Equal(value, response);
             mockSection.Verify(o => o.Value, Times.Once);
             mockRoot.Verify(o => o.GetSection(key), Times.Once);
-            mockBuilder.Verify(o => o.Build(), Times.Once);*/
+            mockBuilder.Verify(o => o.Build(), Times.Once);
         }
     }
 }
