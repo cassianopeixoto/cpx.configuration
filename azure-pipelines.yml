@@ -32,14 +32,15 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePathCoberturaFile) /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePathCoberturaFile) /p:Exclude="[xunit*]*"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Test opencover'
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true CoverletOutputFormat=opencover /p:CoverletOutput=$(coveragePathOpencoverFile) /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(coveragePathOpencoverFile) /p:Exclude="[xunit*]*"'
+
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
