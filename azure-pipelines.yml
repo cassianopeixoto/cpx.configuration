@@ -11,7 +11,7 @@ variables:
   coveragePathFile: '$(coveragePath)/coverage.cobertura.xml'
 
 steps:
-  - task: SonarCloudPrepare@1
+- task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'b595c2a5-7f6b-4a6d-a5a9-d7d2422d323c'
     organization: 'cassianopeixoto-github'
