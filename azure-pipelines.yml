@@ -17,6 +17,7 @@ steps:
     organization: 'cassianopeixoto-github'
     projectKey: 'cassianopeixoto'
     projectName: 'cpx.configuration'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(coveragePathFile)/coverage.opencover.xml'
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -30,18 +31,13 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePathFile) /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=“cobertura%2copencover" /p:CoverletOutput=$(coveragePathFile) /p:Exclude="[xunit*]*"'
 
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(coveragePathFile)'
-    failIfCoverageEmpty: true
-
-- task: reportgenerator@4
-  inputs:
-    reports: '$(coveragePathFile)'
-    reporttypes: 'HTMLChart;SonarQube'    
+    failIfCoverageEmpty: true   
 
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
