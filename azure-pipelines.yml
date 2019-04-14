@@ -8,8 +8,7 @@ variables:
   buildConfiguration: 'Release'
   testPath: '$(Build.SourcesDirectory)/CPX.Configuration.Test'
   coveragePath: '$(testPath)/TestResults/Coverage'
-  coveragePathCoberturaFile: '$(coveragePath)/coverage.cobertura.xml'
-  coveragePathOpencoverFile: '$(coveragePath)/coverage.opencover.xml'
+  coverageFile: '$(coveragePath)/coverage.opencover.xml'
 
 steps:
 - task: SonarCloudPrepare@1
@@ -18,7 +17,7 @@ steps:
     organization: 'cassianopeixoto-github'
     projectKey: 'cassianopeixoto'
     projectName: 'cpx.configuration'
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(coveragePathOpencoverFile)'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(coverageFile)'
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -28,24 +27,11 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Test cobertura'
-  inputs:
-    command: test
-    projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePathCoberturaFile) /p:Exclude="[xunit*]*"'
-
-- task: DotNetCoreCLI@2
   displayName: 'Test opencover'
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(coveragePathOpencoverFile) /p:Exclude="[xunit*]*"'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(coveragePathCoberturaFile)'
-    failIfCoverageEmpty: true   
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(coverageFile) /p:Exclude="[xunit*]*"'
 
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
