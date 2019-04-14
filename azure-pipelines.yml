@@ -11,6 +11,13 @@ variables:
   coveragePathFile: '$(coveragePath)/coverage.cobertura.xml'
 
 steps:
+  - task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'b595c2a5-7f6b-4a6d-a5a9-d7d2422d323c'
+    organization: 'cassianopeixoto-github'
+    projectKey: 'cassianopeixoto'
+    projectName: 'cpx.configuration'
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -34,24 +41,10 @@ steps:
 - task: reportgenerator@4
   inputs:
     reports: '$(coveragePathFile)'
-    reporttypes: 'HTMLChart;SonarQube'
-
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'b595c2a5-7f6b-4a6d-a5a9-d7d2422d323c'
-    organization: 'cassianopeixoto-github'
-    projectKey: 'cassianopeixoto'
-    projectName: 'cpx.configuration'    
+    reporttypes: 'HTMLChart;SonarQube'    
 
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
 
 - task: SonarCloudPublish@1
   displayName: 'SonarQubePublish'
-
-
-
-
-
-
-
