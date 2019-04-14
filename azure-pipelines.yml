@@ -17,7 +17,7 @@ steps:
     organization: 'cassianopeixoto-github'
     projectKey: 'cassianopeixoto'
     projectName: 'cpx.configuration'
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(coveragePathFile)/coverage.opencover.xml'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(coveragePath)/coverage.opencover.xml'
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -44,3 +44,4 @@ steps:
 
 - task: SonarCloudPublish@1
   displayName: 'SonarQubePublish'
+
