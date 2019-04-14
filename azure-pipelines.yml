@@ -27,12 +27,12 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(System.DefaultWorkingDirectory)/**/coverage.cobertura.xml /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude="[xunit*]*"'
 
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'cobertura'
-    summaryFileLocation: $'$(System.DefaultWorkingDirectory)/**/coverage.cobertura.xml'
+    summaryFileLocation: $'$(System.DefaultWorkingDirectory)/coverage.cobertura.xml'
     failIfCoverageEmpty: true
 
 - task: SonarQubeAnalyze@4
