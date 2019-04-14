@@ -29,6 +29,10 @@ steps:
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)\\TestResults\\Coverage /p:Exclude="[xunit*]*"'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName: 'cpx.configuration'
+
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'cobertura'
