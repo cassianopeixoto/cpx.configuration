@@ -6,6 +6,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  testPath: '$(Build.SourcesDirectory)/CPX.Configuration.Test'
+  coveragePath: '$(testPath)/TestResults/Coverage'
 
 steps:
 - task: SonarCloudPrepare@1
@@ -27,14 +29,15 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePath) /p:Exclude="[xunit*]*"'
 
-- task: PublishCodeCoverageResults@1
+- task: DotNetCoreCLI@2
+  displayName: Coverage
   inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/TestResults/Reports'
-    failIfCoverageEmpty: true
+    command: 'custom'
+    projects: '$(testPath)/CPX.Configuration.Test.csproj'
+    custom: 'reportgenerator'
+    arguments: '"-reports:$(coveragePath)/coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"'
 
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
