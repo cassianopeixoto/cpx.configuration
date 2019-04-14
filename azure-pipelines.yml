@@ -31,7 +31,7 @@ steps:
   inputs:
     command: test
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=“cobertura%2copencover" /p:CoverletOutput=$(coveragePathFile) /p:Exclude="[xunit*]*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover CoverletOutputFormat=cobertura /p:CoverletOutput=$(coveragePathFile) /p:Exclude="[xunit*]*"'
 
 - task: PublishCodeCoverageResults@1
   inputs:
