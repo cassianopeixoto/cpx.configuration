@@ -35,7 +35,7 @@ steps:
 - task: reportgenerator@4
   inputs:
     reports: '$(coveragePathFile)'
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;SonarQube'
+    reporttypes: 'HtmlInline_AzurePipelines_Dark'
 
 - task: SonarQubeAnalyze@4
   displayName: 'SonarQubeAnalyze'    
