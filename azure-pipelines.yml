@@ -5,6 +5,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
+- group: SonarQube
   buildConfiguration: 'Release'
   testPath: '$(Build.SourcesDirectory)/CPX.Configuration.Test'
   coveragePath: '$(testPath)/TestResults/Coverage'
@@ -13,9 +14,9 @@ variables:
 steps:
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: '$(SonarQube.Key)'
-    organization: '$(SonarQube.Organization)'
-    projectKey: '$(SonarQube.ProjectKey)'
+    SonarCloud: '$(SonarQubeKey)'
+    organization: '$(SonarQubeOrganization)'
+    projectKey: '$(SonarQubeProjectKey)'
     projectName: 'cpx.configuration'
     extraProperties: 'sonar.cs.opencover.reportsPaths=$(coverageFile)'
 
