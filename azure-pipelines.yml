@@ -13,9 +13,9 @@ variables:
 steps:
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'b595c2a5-7f6b-4a6d-a5a9-d7d2422d323c'
-    organization: 'cassianopeixoto-github'
-    projectKey: 'cassianopeixoto'
+    SonarCloud: '$(SonarQube.Key)'
+    organization: '$(SonarQube.Organization)'
+    projectKey: '$(SonarQube.ProjectKey)'
     projectName: 'cpx.configuration'
     extraProperties: 'sonar.cs.opencover.reportsPaths=$(coverageFile)'
 
