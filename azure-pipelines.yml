@@ -6,12 +6,14 @@ pool:
 
 variables:
 - group: SonarQube
-- name: SonarQube
-- value: 'SonarQube'
-  buildConfiguration: 'Release'
-  testPath: '$(Build.SourcesDirectory)/CPX.Configuration.Test'
-  coveragePath: '$(testPath)/TestResults/Coverage'
-  coverageFile: '$(coveragePath)/coverage.opencover.xml'
+- name: buildConfiguration
+- value: 'Release'
+- name: testPath
+- value: '$(Build.SourcesDirectory)/CPX.Configuration.Test'
+- name: coveragePath
+- value: '$(testPath)/TestResults/Coverage'
+- name: coverageFile
+- value: '$(coveragePath)/coverage.opencover.xml'
 
 steps:
 - task: SonarCloudPrepare@1
