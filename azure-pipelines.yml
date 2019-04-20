@@ -6,6 +6,8 @@ pool:
 
 variables:
 - group: SonarQube
+- name: SonarQube
+- value: 'SonarQube'
   buildConfiguration: 'Release'
   testPath: '$(Build.SourcesDirectory)/CPX.Configuration.Test'
   coveragePath: '$(testPath)/TestResults/Coverage'
