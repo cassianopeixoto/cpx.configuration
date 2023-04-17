@@ -8,8 +8,11 @@ public sealed class ConfigurationService : IConfigurationService
 {
     private readonly IConfiguration configuration;
 
-    public ConfigurationService(IConfiguration configuration)
+    public ConfigurationService(IConfiguration? configuration)
     {
+        if (configuration is null)
+            throw new ArgumentNullException(nameof(configuration));
+
         this.configuration = configuration;
     }
 
@@ -55,7 +58,6 @@ public sealed class ConfigurationService : IConfigurationService
 
     public T GetObject<T>(string key) where T : class
     {
-
         var stringValue = GetString(key);
 
         try

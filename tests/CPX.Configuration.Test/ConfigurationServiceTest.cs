@@ -8,6 +8,19 @@ namespace CPX.Configuration.Test;
 public class ConfigurationServiceTest
 {
     [Fact]
+    public void Should_not_be_able_to_instanciate_configuration_service_with_null_configuration()
+    {
+        // Arrange
+        IConfiguration? configuration = null;
+        // Act
+        // Assert
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            new ConfigurationService(configuration);
+        });
+    }
+
+    [Fact]
     public void Should_be_able_to_return_string()
     {
         // Arrange
